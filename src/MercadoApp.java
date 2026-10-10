@@ -46,6 +46,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.plaf.basic.BasicButtonUI;
 
 public class MercadoApp extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -202,8 +203,11 @@ public class MercadoApp extends JFrame {
 				BorderFactory.createLineBorder(primario ? BLUE : LINE),
 				BorderFactory.createEmptyBorder(9, 13, 9, 13)));
 		if (primario) {
+			button.setUI(new BasicButtonUI());
 			button.setBackground(BLUE);
 			button.setForeground(Color.WHITE);
+			button.setOpaque(true);
+			button.setContentAreaFilled(true);
 		} else {
 			button.setBackground(Color.WHITE);
 			button.setForeground(INK);
@@ -315,13 +319,23 @@ public class MercadoApp extends JFrame {
 	private void removerProduto() {
 		Produto produto = produtoSelecionado();
 		if (produto == null) return;
-		int resposta = JOptionPane.showConfirmDialog(this,
-				"Remover “" + produto.getNome() + "” do cadastro?", "Confirmar remoção",
-				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-		if (resposta == JOptionPane.YES_OPTION) {
+		if (confirmarRemocao(produto)) {
 			produtos.remove(produto);
 			persistir("Produto removido.");
 		}
+	}
+
+	private boolean confirmarRemocao(Produto produto) {
+		JOptionPane painel = new JOptionPane("Remover \"" + produto.getNome() + "\" do cadastro?",
+				JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION);
+		JButton cancelar = botao("Cancelar", false);
+		JButton remover = botao("Confirmar remoção", true);
+		painel.setOptions(new Object[] { cancelar, remover });
+		javax.swing.JDialog dialogo = painel.createDialog(this, "Confirmar remoção");
+		cancelar.addActionListener(event -> painel.setValue(cancelar));
+		remover.addActionListener(event -> painel.setValue(remover));
+		dialogo.setVisible(true);
+		return painel.getValue() == remover;
 	}
 
 	private Produto produtoSelecionado() {
@@ -470,8 +484,11 @@ public class MercadoApp extends JFrame {
 			botoes.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
 			JButton cancelar = new JButton("Cancelar");
 			JButton salvar = new JButton("Salvar produto");
+			salvar.setUI(new BasicButtonUI());
 			salvar.setBackground(BLUE);
 			salvar.setForeground(Color.WHITE);
+			salvar.setOpaque(true);
+			salvar.setContentAreaFilled(true);
 			cancelar.addActionListener(event -> dispose());
 			salvar.addActionListener(event -> validarESalvar());
 			botoes.add(cancelar);

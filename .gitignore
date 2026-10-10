@@ -1,3 +1,4 @@
 build/
+dist/windows/
 produtos.bin
 produtos.bin.tmp
