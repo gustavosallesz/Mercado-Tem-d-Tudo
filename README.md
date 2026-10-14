@@ -14,23 +14,19 @@ Aplicativo desktop em Java para cadastro e consulta de produtos. Esta versao atu
 
 ## Executar
 
-### Duplo clique no Windows
+Baixe `dist/MercadoTemdTudo.jar`. Com Java 8 ou superior instalado e associado a arquivos `.jar`, abra o arquivo com duplo clique. O sistema grava os dados em `produtos.bin` no mesmo diretorio de execucao.
 
-Baixe `dist/MercadoTemdTudo-Windows.zip`, extraia a pasta e abra `Mercado Tem d'Tudo/Mercado Tem d'Tudo.exe`. O pacote inclui seu proprio runtime Java.
-
-### Executar o JAR
-
-Baixe `dist/MercadoTemdTudo.jar` e execute com Java 8 ou superior:
+Se o duplo clique nao abrir o aplicativo, use o atalho `run.bat` incluido no repositorio. Tambem e possivel iniciar pelo terminal:
 
 ```bat
 java -jar MercadoTemdTudo.jar
 ```
 
-No repositorio, o atalho `run.bat` abre o JAR ja compilado. O arquivo antigo `Mercado Tem d'Tudo.exe` foi mantido sem alteracoes como distribuicao legada.
+O arquivo antigo `Mercado Tem d'Tudo.exe` foi mantido sem alteracoes como distribuicao legada.
 
 ## Compilar
 
-Instale um JDK 9 ou superior e execute `build.bat`. O script compila para Java 8 e grava o JAR em `dist/MercadoTemdTudo.jar`. Para criar o app-image e o ZIP Windows autocontido, use um JDK 14 ou superior e execute `package-windows.bat`.
+Instale um JDK 9 ou superior e execute `build.bat`. O script compila para Java 8 e grava o JAR em `dist/MercadoTemdTudo.jar`.
 
 ## Teste
 
